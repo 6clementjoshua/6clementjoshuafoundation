@@ -275,18 +275,33 @@ export default function DonatePage() {
                             </p>
 
                             <div className="mt-6 grid grid-cols-1 gap-3">
-                             
                                 <button
                                     disabled={!canPay || loading !== null || providerRecommended !== "flutterwave"}
                                     onClick={startFlutterwave}
                                     className="water-btn px-6 py-3 text-sm font-semibold disabled:opacity-60"
                                 >
-                                    {loading === "flutterwave" ? "Redirecting..." : "Pay with Flutterwave (recommended for NGN)"}
+                                    {loading === "flutterwave"
+                                        ? "Redirecting..."
+                                        : "Pay with Flutterwave (recommended for NGN)"}
                                 </button>
 
+                                {/* Large payment contact option */}
+                                <div className="rounded-2xl border border-black/10 bg-black/[0.03] p-4 text-sm text-black/75 leading-relaxed">
+                                    For <span className="font-semibold">large donations, corporate giving, or bank transfers</span>,
+                                    please contact us directly via email:&nbsp;
+                                    <a
+                                        href="mailto:donate@6clementjoshuafoundation.com?subject=Large%20Donation%20Inquiry"
+                                        className="font-semibold text-black underline underline-offset-2 hover:opacity-80 transition"
+                                    >
+                                        donate@6clementjoshuafoundation.com
+                                    </a>
+                                </div>
+
+                                {/* Payment status note */}
                                 <div className="rounded-2xl border border-black/10 bg-black/[0.03] p-5 text-sm text-black/70 leading-relaxed">
-                                    If you return from checkout without completing payment, this page will show “Payment not received”.
-                                    Once payment is confirmed, you’ll see success and receive an email receipt/confirmation.
+                                    If you return from checkout without completing payment, this page will show
+                                    “Payment not received”. Once payment is confirmed, you’ll see success and
+                                    receive an email receipt/confirmation.
                                 </div>
                             </div>
                         </div>
