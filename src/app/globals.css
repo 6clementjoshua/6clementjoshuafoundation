@@ -1,26 +1,147 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --glass: rgba(255, 255, 255, 0.55);
+  --glass-strong: rgba(255, 255, 255, 0.72);
+  --stroke: rgba(0, 0, 0, 0.08);
+  --stroke-strong: rgba(0, 0, 0, 0.14);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.bg-foundation {
+  background:
+    radial-gradient(900px 500px at 10% 10%, rgba(255, 255, 255, 0.95), transparent 55%),
+    radial-gradient(900px 500px at 90% 0%, rgba(235, 246, 255, 0.95), transparent 55%),
+    radial-gradient(700px 450px at 80% 80%, rgba(255, 240, 250, 0.85), transparent 55%),
+    linear-gradient(to bottom, rgba(255, 255, 255, 1), rgba(250, 250, 252, 1));
 }
 
+/* Premium font pairing */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+h1, h2, h3, .font-display {
+  font-family: var(--font-space), var(--font-inter), system-ui, sans-serif;
+}
+
+/* Utility helpers for glass + bevel */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.glass-strong {
+  background: var(--glass-strong);
+  border: 1px solid var(--stroke-strong);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow:
+    0 18px 45px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.water-btn {
+  position: relative;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+.water-btn::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: 9999px;
+  background: radial-gradient(180px 40px at 30% 20%, rgba(255, 255, 255, 0.95), transparent 60%);
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.water-btn:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.80),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.water-btn:active {
+  transform: translateY(0px) scale(0.99);
+}
+
+
+/* Donate highlight — PURE white / neutral (no color) */
+.donate-glow {
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.12),
+    0 26px 60px rgba(0, 0, 0, 0.16),
+    0 0 45px rgba(255, 255, 255, 0.75);
+}
+
+.water-btn:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -12px 28px rgba(0, 0, 0, 0.06);
+}
+
+/* Steel / titanium card feel */
+.steel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(245, 246, 248, 0.78));
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -18px 28px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* Water-style link button */
+.water-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.40);
+  border: 1px solid rgba(0, 0, 0, 0.10);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.06);
+  transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.water-link:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 20px 45px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.80),
+    inset 0 -10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.water-link:active {
+  transform: translateY(0px) scale(0.99);
 }
