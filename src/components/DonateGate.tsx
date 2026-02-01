@@ -138,11 +138,11 @@ export default function DonateGate({
 
                   <div className="mt-3 text-white">
                     <div className="text-xl sm:text-2xl font-semibold tracking-tight">
-                      Before you donate
+                      Before you donate 🤍 First  we want to appreciate your generosity.
                     </div>
                     <p className="mt-2 max-w-2xl text-sm sm:text-[15px] text-white/85 leading-relaxed">
-                      Clement Joshua Foundation does <span className="font-semibold">not</span> store your bank or card details.
-                      Payments are processed securely by Stripe or Flutterwave.
+                      6Clement Joshua Foundation does <span className="font-semibold">not</span> store your bank or card details.
+                      Payments are processed securely by Flutterwave.
                     </p>
 
                     <div className="mt-3 flex flex-wrap gap-2 text-xs">
