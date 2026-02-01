@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SITE } from "@/lib/site";
+import DonateGate from "./DonateGate";
 
 const CAC_NUMBER = "8447002";
 
@@ -52,16 +53,15 @@ export default function Header() {
                         <Link className="px-4 py-2 rounded-full glass text-sm hover:glass-strong transition" href="/contact">
                             Contact
                         </Link>
-
-                        <Link href="/donate" className="water-btn donate-glow px-5 py-2.5 text-sm font-semibold">
+                        <DonateGate className="water-btn donate-glow px-6 py-3 text-sm font-semibold">
                             Donate
-                        </Link>
+                        </DonateGate>
                     </nav>
 
                     <div className="md:hidden">
-                        <Link href="/donate" className="water-btn donate-glow px-4 py-2 text-sm font-semibold">
+                        <DonateGate className="water-btn donate-glow px-6 py-3 text-sm font-semibold">
                             Donate
-                        </Link>
+                        </DonateGate>
                     </div>
                 </div>
             </div>
