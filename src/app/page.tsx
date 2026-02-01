@@ -21,12 +21,7 @@ export default function HomePage() {
 
       {/* Full-width hero */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
-        {/* Key mobile fixes:
-            - overflow-hidden prevents any inner media from bleeding past rounded edges
-            - isolate ensures glow layers don't create weird overflow stacking on some mobile browsers
-            - min-w-0 on grid children prevents “content-based min width” overflow in CSS grid
-            - centered slideshow + full-width container on mobile
-        */}
+       
         <div className="relative isolate overflow-hidden rounded-[2rem] glass-strong">
           {/* soft glow accents */}
           <div className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-white/60 blur-3xl" />
@@ -97,11 +92,7 @@ export default function HomePage() {
 
             {/* Right: slideshow */}
             <div className="min-w-0 flex items-center justify-center">
-              {/* Mobile containment:
-                  - w-full ensures it fits inside the card
-                  - max-w-* prevents “too wide” media on larger phones
-                  - overflow-hidden ensures video doesn't stick out of rounded corners
-              */}
+              
               <div className="w-full max-w-[520px] sm:max-w-[620px] lg:max-w-none overflow-hidden rounded-[1.5rem]">
                 <HeroSlideshow />
               </div>
