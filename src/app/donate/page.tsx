@@ -275,14 +275,7 @@ export default function DonatePage() {
                             </p>
 
                             <div className="mt-6 grid grid-cols-1 gap-3">
-                                <button
-                                    disabled={!canPay || loading !== null || providerRecommended !== "stripe"}
-                                    onClick={startStripe}
-                                    className="water-btn donate-glow px-6 py-3 text-sm font-semibold disabled:opacity-60"
-                                >
-                                    {loading === "stripe" ? "Redirecting..." : "Pay with Stripe (recommended for this currency)"}
-                                </button>
-
+                             
                                 <button
                                     disabled={!canPay || loading !== null || providerRecommended !== "flutterwave"}
                                     onClick={startFlutterwave}
