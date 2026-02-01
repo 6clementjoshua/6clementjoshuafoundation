@@ -19,7 +19,7 @@ export default function DonateGate({
   href = "/donate",
   className,
   children,
-  videoSrc = "/impact/impact-1.mp4",
+  videoSrc = "/impact/abuja-hero",
   startAtSeconds = 10,
 }: Props) {
   const [open, setOpen] = useState(false);
