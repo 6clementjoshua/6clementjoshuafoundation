@@ -16,22 +16,28 @@ import ImpactEventsShowcase from "@/components/ImpactEventsShowcase";
 
 export default function HomePage() {
   return (
-    <main>
+    <main className="w-full overflow-x-hidden">
       <Header />
 
       {/* Full-width hero */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
-        <div className="relative overflow-hidden rounded-[2rem] glass-strong">
+        {/* Key mobile fixes:
+            - overflow-hidden prevents any inner media from bleeding past rounded edges
+            - isolate ensures glow layers don't create weird overflow stacking on some mobile browsers
+            - min-w-0 on grid children prevents “content-based min width” overflow in CSS grid
+            - centered slideshow + full-width container on mobile
+        */}
+        <div className="relative isolate overflow-hidden rounded-[2rem] glass-strong">
           {/* soft glow accents */}
           <div className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-white/60 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-24 -left-24 h-80 w-80 rounded-full bg-black/5 blur-3xl" />
 
           <div className="relative grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 sm:p-10 lg:p-12">
             {/* Left: brand + hero message */}
-            <div className="flex flex-col justify-center">
+            <div className="min-w-0 flex flex-col justify-center">
               <div className="inline-flex items-center gap-2 rounded-full glass px-3 py-1 text-xs text-black/70 w-fit">
                 <span className="h-2 w-2 rounded-full bg-black/70" />
-                <span>{SITE.subMotto}</span>
+                <span className="truncate">{SITE.subMotto}</span>
               </div>
 
               <h1 className="mt-4 font-display text-4xl sm:text-5xl font-semibold tracking-tight">
@@ -90,8 +96,15 @@ export default function HomePage() {
             </div>
 
             {/* Right: slideshow */}
-            <div className="flex items-center">
-              <HeroSlideshow />
+            <div className="min-w-0 flex items-center justify-center">
+              {/* Mobile containment:
+                  - w-full ensures it fits inside the card
+                  - max-w-* prevents “too wide” media on larger phones
+                  - overflow-hidden ensures video doesn't stick out of rounded corners
+              */}
+              <div className="w-full max-w-[520px] sm:max-w-[620px] lg:max-w-none overflow-hidden rounded-[1.5rem]">
+                <HeroSlideshow />
+              </div>
             </div>
           </div>
         </div>
