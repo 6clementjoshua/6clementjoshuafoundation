@@ -10,7 +10,7 @@ const CAC_NUMBER = "8447002";
 const FOUNDED_YEAR = "2011";
 
 // ✅ Change this if your filename is different
-const PARENT_BRAND_VIDEO_SRC = "/brand/parent-brand/parent-brand.mp4";
+const PARENT_BRAND_VIDEO_SRC = "/brands/parent-brand.mp4";
 
 const POLICY_LINKS = [
     { href: "/policies/privacy", label: "Privacy" },
@@ -381,8 +381,8 @@ export default function AboutPage() {
                     <div className="mt-6 rounded-2xl border border-black/10 bg-black/[0.03] p-5">
                         <div className="text-[11px] uppercase tracking-wide text-black/55">Video location</div>
                         <p className="mt-2 text-sm text-black/75 leading-relaxed">
-                            Place your MP4 here: <span className="font-semibold">public/brand/parent-brand/parent-brand.mp4</span>{" "}
-                            (then it loads at <span className="font-semibold">/brand/parent-brand/parent-brand.mp4</span>).
+                            Place your MP4 here: <span className="font-semibold">public/brands/parent-brand.mp4</span>{" "}
+                            (then it loads at <span className="font-semibold">/brands/parent-brand.mp4</span>).
                         </p>
                     </div>
                 </div>
