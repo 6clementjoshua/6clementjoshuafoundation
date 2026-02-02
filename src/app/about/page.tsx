@@ -9,6 +9,9 @@ import { SITE } from "@/lib/site";
 const CAC_NUMBER = "8447002";
 const FOUNDED_YEAR = "2011";
 
+// ✅ Change this if your filename is different
+const PARENT_BRAND_VIDEO_SRC = "/brand/parent-brand/parent-brand.mp4";
+
 const POLICY_LINKS = [
     { href: "/policies/privacy", label: "Privacy" },
     { href: "/policies/terms", label: "Terms" },
@@ -59,7 +62,7 @@ const ECOSYSTEM_BRANDS = [
     { key: "restaurant", label: "6Clement Joshua Restaurant", img: "/brands/cj-restaurant.jpg", note: "A brand under the group supporting the mission." },
     { key: "gaming", label: "6Clement Joshua Gaming", img: "/brands/cj-gaming.jpg", note: "A brand under the group supporting the mission." },
     { key: "music", label: "6Clement Joshua Music", img: "/brands/cj-music.jpg", note: "A brand under the group supporting the mission." },
-    // Water brand: no logo provided yet — you can add later
+    { key: "water", label: "6Clement Joshua Water", img: "/brands/cj-water.jpg", note: "A brand under the group supporting the mission." },
 ];
 
 const CONTACT_EMAIL = "info@6clementjoshuafoundation.com";
@@ -292,8 +295,100 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-                {/* ECOSYSTEM */}
+                {/* ✅ NEW: PARENT COMPANY HERO VIDEO (BEFORE ECOSYSTEM) */}
                 <div className="mt-10 glass rounded-[2rem] p-6 sm:p-10">
+                    <SectionTitle
+                        overline="Who runs the Foundation"
+                        title="Owned & operated under the 6Clement Joshua parent company"
+                        desc="Clement Joshua Foundation is owned and operated under the 6Clement Joshua parent company. The video below introduces the parent company and explains the wider mission and brand ecosystem behind the Foundation."
+                    />
+
+                    <div className="mt-7 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                        {/* Video card */}
+                        <div className="steel rounded-2xl p-5">
+                            <div className="text-[11px] uppercase tracking-wide text-black/55">Parent company overview</div>
+
+                            <div className="mt-3 overflow-hidden rounded-2xl border border-black/10 bg-white/40">
+                                <div className="relative w-full aspect-video">
+                                    <video
+                                        className="h-full w-full object-cover"
+                                        controls
+                                        playsInline
+                                        preload="metadata"
+                                        poster="/brands/cj-foundation.jpg"
+                                    >
+                                        <source src={PARENT_BRAND_VIDEO_SRC} type="video/mp4" />
+                                    </video>
+                                </div>
+                            </div>
+
+                            <div className="mt-3 text-sm text-black/75 leading-relaxed">
+                                This video explains the <span className="font-semibold">6Clement Joshua</span> parent company—its mission,
+                                leadership structure, and how it powers long-term humanitarian impact through the Foundation.
+                            </div>
+
+                            <div className="mt-4 flex flex-wrap items-center gap-2">
+                                <Pill>Parent company</Pill>
+                                <Pill>Brand ecosystem</Pill>
+                                <Pill tone="good">Mission-backed</Pill>
+                            </div>
+                        </div>
+
+                        {/* Ownership clarity card */}
+                        <div className="steel rounded-2xl p-5">
+                            <div className="text-[11px] uppercase tracking-wide text-black/55">Governance clarity</div>
+
+                            <div className="mt-2 text-sm text-black/75 leading-relaxed">
+                                <span className="font-semibold text-black/85">Who runs the Foundation?</span>
+                                <div className="mt-2">
+                                    The Foundation is managed as a humanitarian service under the{" "}
+                                    <span className="font-semibold">6Clement Joshua</span> parent company. The parent company provides
+                                    operational support, governance oversight, and ecosystem funding—while the Foundation remains
+                                    mission-directed and policy-governed.
+                                </div>
+                            </div>
+
+                            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                <MiniCard
+                                    title="Why this matters"
+                                    bullets={[
+                                        "Transparency about leadership & ownership",
+                                        "Clear accountability for operations",
+                                        "Stronger trust for donors and partners",
+                                    ]}
+                                />
+                                <MiniCard
+                                    title="What stays protected"
+                                    bullets={[
+                                        "Donations remain mission-directed",
+                                        "Anti-fraud & safeguarding controls",
+                                        "No card details stored on our site",
+                                    ]}
+                                />
+                            </div>
+
+                            <div className="mt-4 flex flex-wrap items-center gap-3">
+                                <a href="#ecosystem" className="water-btn px-6 py-3 text-sm font-semibold">
+                                    See the ecosystem →
+                                </a>
+                                <Link href="/contact" className="px-4 py-2 text-sm text-black/70 hover:text-black transition">
+                                    Partnership inquiries →
+                                </Link>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="mt-6 rounded-2xl border border-black/10 bg-black/[0.03] p-5">
+                        <div className="text-[11px] uppercase tracking-wide text-black/55">Video location</div>
+                        <p className="mt-2 text-sm text-black/75 leading-relaxed">
+                            Place your MP4 here: <span className="font-semibold">public/brand/parent-brand/parent-brand.mp4</span>{" "}
+                            (then it loads at <span className="font-semibold">/brand/parent-brand/parent-brand.mp4</span>).
+                        </p>
+                    </div>
+                </div>
+
+                {/* ECOSYSTEM */}
+                <div id="ecosystem" className="mt-10 glass rounded-[2rem] p-6 sm:p-10">
                     <SectionTitle
                         overline="Ecosystem"
                         title="How the mission is funded"
@@ -312,19 +407,6 @@ export default function AboutPage() {
                                 <div className="mt-1 text-sm text-black/70 leading-relaxed">{b.note}</div>
                             </div>
                         ))}
-
-                        {/* Water brand placeholder */}
-                        <div className="steel rounded-2xl p-5">
-                            <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white/40">
-                                <div className="flex aspect-square items-center justify-center text-black/40 text-sm">
-                                    Water brand logo (add later)
-                                </div>
-                            </div>
-                            <div className="mt-3 font-semibold text-black/85">6Clement Joshua Water</div>
-                            <div className="mt-1 text-sm text-black/70 leading-relaxed">
-                                A supporting brand in the ecosystem. (Logo can be added when ready.)
-                            </div>
-                        </div>
                     </div>
 
                     <div className="mt-7 rounded-2xl border border-black/10 bg-black/[0.03] p-5">
@@ -393,7 +475,7 @@ export default function AboutPage() {
                     </div>
                 </div>
 
-                {/* PROOF / MEDIA (optional assets) */}
+                {/* PROOF / MEDIA */}
                 <div className="mt-10 glass rounded-[2rem] p-6 sm:p-10">
                     <SectionTitle
                         overline="Proof of service"
@@ -406,7 +488,6 @@ export default function AboutPage() {
                             <div className="text-[11px] uppercase tracking-wide text-black/55">Outreach video</div>
                             <div className="mt-3 overflow-hidden rounded-2xl border border-black/10 bg-white/40">
                                 <div className="relative w-full aspect-video">
-                                    {/* If you add /public/about/outreach-1.mp4 this will play */}
                                     <video
                                         className="h-full w-full object-cover"
                                         controls
@@ -417,14 +498,12 @@ export default function AboutPage() {
                                     </video>
                                 </div>
                             </div>
-                            
                         </div>
 
                         <div className="steel rounded-2xl p-5">
                             <div className="text-[11px] uppercase tracking-wide text-black/55">President/ward letter</div>
                             <div className="mt-3 overflow-hidden rounded-2xl border border-black/10 bg-white/40">
                                 <div className="relative w-full aspect-video">
-                                    {/* If you add /public/about/president-letter.jpg this will show */}
                                     <Image
                                         src="/about/president-letter.PNG"
                                         alt="Service recognition letter"
@@ -433,7 +512,6 @@ export default function AboutPage() {
                                     />
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
 
@@ -446,8 +524,6 @@ export default function AboutPage() {
                             </div>
                         ))}
                     </div>
-
-                   
                 </div>
 
                 {/* CONTACT */}
