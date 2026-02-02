@@ -71,7 +71,7 @@ export default function PoliciesLayout({ children }: { children: ReactNode }) {
                             protect donors, beneficiaries, and our organization.
                         </div>
                         <div className="mt-3 text-xs text-black/55">
-                            Payments currently supported: <span className="font-semibold">Stripe</span> and{" "}
+                            Payments currently supported: <span className="font-semibold"></span>{" "}
                             <span className="font-semibold">Flutterwave</span>. Additional options (e.g., PayPal)
                             may be added later.
                         </div>

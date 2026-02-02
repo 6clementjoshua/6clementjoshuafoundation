@@ -174,7 +174,7 @@ export default function PolicyShell({
                     <div className="glass rounded-[1.75rem] p-6 sm:p-8">
                         <div className="text-[11px] uppercase tracking-wide text-black/55">Payments</div>
                         <div className="mt-2 text-sm text-black/75 leading-relaxed">
-                            Donations are processed via <span className="font-semibold">Stripe</span> and{" "}
+                            Donations are processed via <span className="font-semibold"></span>{" "}
                             <span className="font-semibold">Flutterwave</span>. We do not store full card details.
                             Additional payment methods (e.g., PayPal) may be added in future updates.
                         </div>
