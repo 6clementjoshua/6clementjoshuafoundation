@@ -44,25 +44,16 @@ export default function HomePage() {
                 create stability, dignity, and long-term opportunity.
               </p>
 
-              <div className="mt-6 flex flex-wrap items-center gap-3 relative z-10">
-                <Link
-                  href="/donate"
-                  className="relative z-10 inline-flex items-center justify-center water-btn donate-glow px-6 py-3 text-sm font-semibold"
-                >
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <Link href="/donate" className="bg-black text-white px-6 py-3">
                   Donate Now
                 </Link>
 
-                <Link
-                  href="/programs"
-                  className="relative z-10 inline-flex items-center justify-center water-btn px-6 py-3 text-sm font-semibold"
-                >
+                <Link href="/programs" className="bg-gray-200 px-6 py-3">
                   Explore Programs
                 </Link>
 
-                <Link
-                  href="/about"
-                  className="relative z-10 inline-flex items-center justify-center px-4 py-2 text-sm text-black/70 hover:text-black transition"
-                >
+                <Link href="/about" className="px-4 py-2">
                   Learn who we are →
                 </Link>
               </div>
