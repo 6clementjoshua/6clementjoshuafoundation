@@ -21,7 +21,6 @@ export default function HomePage() {
 
       {/* Full-width hero */}
       <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-6">
-       
         <div className="relative isolate overflow-hidden rounded-[2rem] glass-strong">
           {/* soft glow accents */}
           <div className="pointer-events-none absolute -top-24 -right-24 h-80 w-80 rounded-full bg-white/60 blur-3xl" />
@@ -40,49 +39,57 @@ export default function HomePage() {
               </h1>
 
               <p className="mt-4 text-base sm:text-lg text-black/70 leading-relaxed">
-                We exist to support real people through humanitarian aid, empowerment, and
-                community-driven programs. Your donation helps create stability, dignity, and
-                long-term opportunity.
+                We exist to support real people through humanitarian aid,
+                empowerment, and community-driven programs. Your donation helps
+                create stability, dignity, and long-term opportunity.
               </p>
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-wrap items-center gap-3 relative z-10">
                 <Link
                   href="/donate"
-                  className="water-btn donate-glow px-6 py-3 text-sm font-semibold"
+                  className="relative z-10 inline-flex items-center justify-center water-btn donate-glow px-6 py-3 text-sm font-semibold"
                 >
                   Donate Now
                 </Link>
 
-                <Link href="/programs" className="water-btn px-6 py-3 text-sm font-semibold">
+                <Link
+                  href="/programs"
+                  className="relative z-10 inline-flex items-center justify-center water-btn px-6 py-3 text-sm font-semibold"
+                >
                   Explore Programs
                 </Link>
 
                 <Link
                   href="/about"
-                  className="px-4 py-2 text-sm text-black/70 hover:text-black transition"
+                  className="relative z-10 inline-flex items-center justify-center px-4 py-2 text-sm text-black/70 hover:text-black transition"
                 >
                   Learn who we are →
                 </Link>
               </div>
-
               {/* Trust strip */}
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div className="steel rounded-2xl p-4">
-                  <div className="text-[11px] tracking-wide text-black/55 uppercase">Focus</div>
+                  <div className="text-[11px] tracking-wide text-black/55 uppercase">
+                    Focus
+                  </div>
                   <div className="mt-1 font-display font-semibold text-black/90">
                     Humanitarian impact
                   </div>
                 </div>
 
                 <div className="steel rounded-2xl p-4">
-                  <div className="text-[11px] tracking-wide text-black/55 uppercase">Approach</div>
+                  <div className="text-[11px] tracking-wide text-black/55 uppercase">
+                    Approach
+                  </div>
                   <div className="mt-1 font-display font-semibold text-black/90">
                     Transparent giving
                   </div>
                 </div>
 
                 <div className="steel rounded-2xl p-4">
-                  <div className="text-[11px] tracking-wide text-black/55 uppercase">Priority</div>
+                  <div className="text-[11px] tracking-wide text-black/55 uppercase">
+                    Priority
+                  </div>
                   <div className="mt-1 font-display font-semibold text-black/90">
                     People-first support
                   </div>
@@ -92,7 +99,6 @@ export default function HomePage() {
 
             {/* Right: slideshow */}
             <div className="min-w-0 flex items-center justify-center">
-              
               <div className="w-full max-w-[520px] sm:max-w-[620px] lg:max-w-none overflow-hidden rounded-[1.5rem]">
                 <HeroSlideshow />
               </div>
