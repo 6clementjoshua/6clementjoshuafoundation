@@ -44,18 +44,33 @@ export default function HomePage() {
                 create stability, dignity, and long-term opportunity.
               </p>
 
-              <div className="mt-6 flex flex-wrap items-center gap-3">
-                <Link href="/donate" className="bg-black text-white px-6 py-3">
-                  Donate Now
-                </Link>
+              <div className="mt-6 space-y-3">
+                <div>
+                  <Link
+                    href="/donate"
+                    className="inline-flex water-btn donate-glow px-6 py-3 text-sm font-semibold"
+                  >
+                    Donate Now
+                  </Link>
+                </div>
 
-                <Link href="/programs" className="bg-gray-200 px-6 py-3">
-                  Explore Programs
-                </Link>
+                <div>
+                  <Link
+                    href="/programs"
+                    className="inline-flex water-btn px-6 py-3 text-sm font-semibold"
+                  >
+                    Explore Programs
+                  </Link>
+                </div>
 
-                <Link href="/about" className="px-4 py-2">
-                  Learn who we are →
-                </Link>
+                <div>
+                  <Link
+                    href="/about"
+                    className="inline-flex px-4 py-2 text-sm text-black/70 hover:text-black transition"
+                  >
+                    Learn who we are →
+                  </Link>
+                </div>
               </div>
               {/* Trust strip */}
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3">
