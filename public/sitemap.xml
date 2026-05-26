@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+  http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.00</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/about</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/programs</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/impact</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.90</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/contact</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/donate</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/privacy</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/terms</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/donor-privacy</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.55</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/refund</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.55</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/transparency</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.60</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/anti-fraud</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.55</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/child-safeguarding</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.55</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/whistleblowing</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.55</priority>
+    </url>
+
+    <url>
+        <loc>https://www.6clementjoshuafoundation.com/policies/cookies</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.50</priority>
+    </url>
+
+</urlset>
