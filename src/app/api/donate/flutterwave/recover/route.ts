@@ -66,14 +66,23 @@ async function verifyByReference(params: { txRef: string; secret: string }) {
     cache: "no-store",
   });
 
-  const json = await res.json().catch(() => ({}));
+  const text = await res.text();
+
+  let json: any = {};
+  try {
+    json = JSON.parse(text);
+  } catch {
+    json = {
+      raw: text,
+    };
+  }
 
   return {
     ok: res.ok,
+    httpStatus: res.status,
     json,
   };
 }
-
 export async function POST(req: NextRequest) {
   try {
     const recoverySecret = getRecoverySecret();
@@ -178,12 +187,16 @@ export async function POST(req: NextRequest) {
           tx_ref: expectedTxRef,
           verified: false,
           action: "left_as_pending",
+          verify_http_status: verified.httpStatus,
+          flutterwave_response_status: verifyJson?.status ?? null,
+          flutterwave_response_message: verifyJson?.message ?? null,
           flutterwave_status: flwStatus || null,
           tx_ref_matches: txRefMatches,
           currency_matches: currencyMatches,
           amount_matches: amountMatches,
           flutterwave_amount: flwAmount || null,
           flutterwave_currency: flwCurrency || null,
+          flutterwave_response: verifyJson,
         });
 
         continue;
