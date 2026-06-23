@@ -264,7 +264,7 @@ export async function POST(req: NextRequest) {
       const cardToken = extractCardToken(flwData);
 
       const updatePayload = {
-        status: "successful",
+        status: "paid",
         flw_tx_ref: flwTxRef || expectedTxRef,
         flw_transaction_id:
           flwData?.id !== undefined && flwData?.id !== null
