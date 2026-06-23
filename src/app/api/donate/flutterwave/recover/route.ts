@@ -50,12 +50,33 @@ function extractCardToken(flwData: any): string | null {
   return trimmed.length > 0 ? trimmed : null;
 }
 
-async function verifyByReference(params: { txRef: string; secret: string }) {
-  const url = new URL(
-    "https://api.flutterwave.com/v3/transactions/verify_by_reference",
-  );
+function extractCustomerEmail(flwData: any): string {
+  return String(
+    flwData?.customer?.email ?? flwData?.customer_email ?? flwData?.email ?? "",
+  )
+    .trim()
+    .toLowerCase();
+}
 
-  url.searchParams.set("tx_ref", params.txRef);
+async function verifyFlutterwaveTransaction(params: {
+  secret: string;
+  txRef?: string;
+  transactionId?: string;
+}) {
+  let url: URL;
+
+  if (params.transactionId) {
+    url = new URL(
+      `https://api.flutterwave.com/v3/transactions/${encodeURIComponent(
+        params.transactionId,
+      )}/verify`,
+    );
+  } else {
+    url = new URL(
+      "https://api.flutterwave.com/v3/transactions/verify_by_reference",
+    );
+    url.searchParams.set("tx_ref", params.txRef || "");
+  }
 
   const res = await fetch(url.toString(), {
     method: "GET",
@@ -72,17 +93,17 @@ async function verifyByReference(params: { txRef: string; secret: string }) {
   try {
     json = JSON.parse(text);
   } catch {
-    json = {
-      raw: text,
-    };
+    json = { raw: text };
   }
 
   return {
     ok: res.ok,
     httpStatus: res.status,
     json,
+    verifyUrlUsed: params.transactionId ? "transaction_id" : "tx_ref",
   };
 }
+
 export async function POST(req: NextRequest) {
   try {
     const recoverySecret = getRecoverySecret();
@@ -105,6 +126,8 @@ export async function POST(req: NextRequest) {
 
     const donorEmail = clean(body?.donor_email, 220).toLowerCase();
     const singleTxRef = clean(body?.tx_ref, 300);
+    const transactionId = clean(body?.transaction_id, 100);
+    const donationId = clean(body?.donation_id, 100);
     const limit = Math.min(Math.max(Number(body?.limit || 50), 1), 100);
 
     const secret = getFlutterwaveSecretKey();
@@ -117,9 +140,12 @@ export async function POST(req: NextRequest) {
       )
       .eq("provider", "flutterwave")
       .in("status", ["created", "pending", "failed", "canceled"])
-      .not("flw_tx_ref", "is", null)
       .order("created_at", { ascending: false })
       .limit(limit);
+
+    if (donationId) {
+      query = query.eq("id", donationId);
+    }
 
     if (singleTxRef) {
       query = query.eq("flw_tx_ref", singleTxRef);
@@ -127,6 +153,16 @@ export async function POST(req: NextRequest) {
 
     if (donorEmail) {
       query = query.eq("donor_email", donorEmail);
+    }
+
+    if (!donationId && !singleTxRef && !donorEmail) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Provide at least one of donation_id, tx_ref, or donor_email.",
+        },
+        { status: 400 },
+      );
     }
 
     const { data: donations, error: fetchError } = await query;
@@ -139,19 +175,23 @@ export async function POST(req: NextRequest) {
       const expectedTxRef = String(donation.flw_tx_ref ?? "");
       const expectedCurrency = String(donation.currency ?? "").toUpperCase();
       const expectedAmount = Number(donation.amount ?? 0);
+      const expectedEmail = String(donation.donor_email ?? "")
+        .trim()
+        .toLowerCase();
 
-      if (!expectedTxRef) {
+      if (!expectedTxRef && !transactionId) {
         results.push({
           donation_id: donation.id,
           verified: false,
           action: "skipped",
-          reason: "missing_flw_tx_ref",
+          reason: "missing_flw_tx_ref_and_transaction_id",
         });
         continue;
       }
 
-      const verified = await verifyByReference({
+      const verified = await verifyFlutterwaveTransaction({
         txRef: expectedTxRef,
+        transactionId,
         secret,
       });
 
@@ -162,17 +202,29 @@ export async function POST(req: NextRequest) {
       const flwTxRef = String(flwData?.tx_ref ?? "");
       const flwCurrency = String(flwData?.currency ?? "").toUpperCase();
       const flwAmount = Number(flwData?.amount ?? 0);
+      const flwCustomerEmail = extractCustomerEmail(flwData);
 
-      const txRefMatches = flwTxRef === expectedTxRef;
+      const statusMatches = flwStatus === "successful";
       const currencyMatches = flwCurrency === expectedCurrency;
       const amountMatches = flwAmount >= expectedAmount;
 
+      // If transaction_id is supplied, we allow tx_ref mismatch,
+      // but only if the verified transaction email/amount/currency matches.
+      const txRefMatches = transactionId
+        ? Boolean(flwTxRef)
+        : flwTxRef === expectedTxRef;
+
+      const emailMatches = flwCustomerEmail
+        ? flwCustomerEmail === expectedEmail
+        : true;
+
       const isSuccessful =
         verified.ok &&
-        flwStatus === "successful" &&
+        statusMatches &&
         txRefMatches &&
         currencyMatches &&
-        amountMatches;
+        amountMatches &&
+        emailMatches;
 
       if (!isSuccessful) {
         await sb
@@ -184,16 +236,21 @@ export async function POST(req: NextRequest) {
 
         results.push({
           donation_id: donation.id,
-          tx_ref: expectedTxRef,
+          expected_tx_ref: expectedTxRef,
           verified: false,
           action: "left_as_pending",
+          verify_mode: verified.verifyUrlUsed,
           verify_http_status: verified.httpStatus,
           flutterwave_response_status: verifyJson?.status ?? null,
           flutterwave_response_message: verifyJson?.message ?? null,
-          flutterwave_status: flwStatus || null,
+          flutterwave_payment_status: flwStatus || null,
+          flutterwave_tx_ref: flwTxRef || null,
+          flutterwave_customer_email: flwCustomerEmail || null,
+          status_matches: statusMatches,
           tx_ref_matches: txRefMatches,
           currency_matches: currencyMatches,
           amount_matches: amountMatches,
+          email_matches: emailMatches,
           flutterwave_amount: flwAmount || null,
           flutterwave_currency: flwCurrency || null,
           flutterwave_response: verifyJson,
@@ -208,10 +265,11 @@ export async function POST(req: NextRequest) {
 
       const updatePayload = {
         status: "successful",
+        flw_tx_ref: flwTxRef || expectedTxRef,
         flw_transaction_id:
           flwData?.id !== undefined && flwData?.id !== null
             ? String(flwData.id)
-            : null,
+            : transactionId || null,
 
         flw_card_token: cardToken,
         flw_card_brand:
@@ -231,9 +289,11 @@ export async function POST(req: NextRequest) {
 
       results.push({
         donation_id: donation.id,
-        tx_ref: expectedTxRef,
+        old_tx_ref: expectedTxRef,
+        new_tx_ref: updatePayload.flw_tx_ref,
         verified: true,
         action: "updated_successful",
+        verify_mode: verified.verifyUrlUsed,
         flw_transaction_id: updatePayload.flw_transaction_id,
         token_saved: Boolean(cardToken),
         card_brand_saved: Boolean(updatePayload.flw_card_brand),
